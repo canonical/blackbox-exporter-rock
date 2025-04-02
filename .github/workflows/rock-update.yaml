@@ -9,7 +9,7 @@ jobs:
   build:
     uses: canonical/observability/.github/workflows/rock-update.yaml@v0
     with:
-      rock-name: tempo
-      source-repo: grafana/tempo
+      rock-name: blackbox-exporter
+      source-repo: prometheus/blackbox_exporter
       check-go: true
     secrets: inherit

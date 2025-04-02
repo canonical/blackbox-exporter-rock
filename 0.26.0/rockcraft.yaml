@@ -1,46 +1,48 @@
-name: tempo
-summary: Tempo in a Rock.
-description: "Tempo is a distributed tracing backend by Grafana."
-version: "2.6.1"
+name: blackbox-exporter
+summary: Blackbox Exporter in a Rock.
+description: "The blackbox exporter allows blackbox probing of endpoints over HTTP, HTTPS, DNS, TCP, ICMP and gRPC."
+version: "0.26.0"
 base: ubuntu@24.04
-license: AGPL-3.0
+license: Apache-2.0
 services:
-  tempo:
-    command: /bin/tempo --config.file=/etc/tempo/tempo.yaml
+  blackbox-exporter:
+    command: /bin/blackbox_exporter --config.file=/etc/blackbox_exporter/config.yaml
     override: replace
     startup: enabled
 platforms:
   amd64:
 parts:
-  tempo:
+  blackbox-exporter:
     plugin: go
-    source: https://github.com/grafana/tempo
+    source: https://github.com/prometheus/blackbox_exporter
     source-type: git
-    source-tag: "v2.6.1"
+    source-tag: "v0.26.0"
+    source-depth: 1
     build-snaps:
-      - go/1.22/stable
+      - go/1.23/stable
     build-environment:
       - BUILD_IN_CONTAINER: "false"
     build-packages:
       - libsystemd-dev
     override-build: |
-      go build -o $CRAFT_PART_INSTALL/bin/tempo -ldflags "-X main.Version=${CRAFT_PROJECT_VERSION}" ./cmd/tempo
+      make build
+      install -D -m755 blackbox_exporter $CRAFT_PART_INSTALL/bin/blackbox_exporter
     stage:
-      - bin/tempo
+      - bin/blackbox_exporter
   default-config:
     plugin: dump
     source: .
     organize:
-      tempo.yaml: etc/tempo/tempo.yaml
+      config.yaml: etc/blackbox_exporter/config.yaml
     stage:
-      - etc/tempo/tempo.yaml
+      - etc/blackbox_exporter/config.yaml
   ca-certs:
     plugin: nil
     overlay-packages: [ca-certificates]
   deb-security-manifest:
     plugin: nil
     after:
-      - tempo
+      - blackbox-exporter
       - ca-certs
     override-prime: |
       set -x

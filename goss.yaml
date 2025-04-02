@@ -1,16 +1,14 @@
 process:
-  tempo:
+  # process name can be 15 chars max 
+  blackbox_export:
     running: true
 http:
-  ready:
+  healthy:
     status: 200
-    url: http://localhost:3200/ready
+    url: http://localhost:9115/-/healthy
   metrics:
     status: 200
-    url: http://localhost:3200/metrics
-  status:
+    url: http://localhost:9115/metrics
+  config:
     status: 200
-    url: http://localhost:3200/status
-  buildinfo:
-    status: 200
-    url: http://localhost:3200/api/status/buildinfo
+    url: http://localhost:9115/config
