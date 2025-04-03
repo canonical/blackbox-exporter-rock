@@ -5,8 +5,8 @@ version: "0.26.0"
 base: ubuntu@24.04
 license: Apache-2.0
 services:
-  blackbox-exporter:
-    command: /bin/blackbox_exporter --config.file=/etc/blackbox_exporter/config.yaml
+  blackbox:
+    command: /bin/blackbox_exporter --config.file=/etc/blackbox_exporter/config.yml
     override: replace
     startup: enabled
 platforms:
@@ -33,9 +33,9 @@ parts:
     plugin: dump
     source: .
     organize:
-      config.yaml: etc/blackbox_exporter/config.yaml
+      config.yaml: etc/blackbox_exporter/config.yml
     stage:
-      - etc/blackbox_exporter/config.yaml
+      - etc/blackbox_exporter/config.yml
   ca-certs:
     plugin: nil
     overlay-packages: [ca-certificates]
