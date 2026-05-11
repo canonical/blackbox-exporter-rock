@@ -2,7 +2,7 @@ name: blackbox-exporter
 summary: Blackbox Exporter in a Rock.
 description: "The blackbox exporter allows blackbox probing of endpoints over HTTP, HTTPS, DNS, TCP, ICMP and gRPC."
 version: "0.28.0"
-base: ubuntu@24.04
+base: ubuntu@26.04
 license: Apache-2.0
 services:
   blackbox:
