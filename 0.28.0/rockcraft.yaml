@@ -26,9 +26,9 @@ parts:
       - libsystemd-dev
     override-build: |
       make build
-      install -D -m755 blackbox_exporter $CRAFT_PART_INSTALL/bin/blackbox_exporter
+      install -D -m755 blackbox_exporter $CRAFT_PART_INSTALL/usr/bin/blackbox_exporter
     stage:
-      - bin/blackbox_exporter
+      - usr/bin/blackbox_exporter
   default-config:
     plugin: dump
     source: .
