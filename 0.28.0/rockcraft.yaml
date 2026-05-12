@@ -2,7 +2,7 @@ name: blackbox-exporter
 summary: Blackbox Exporter in a Rock.
 description: "The blackbox exporter allows blackbox probing of endpoints over HTTP, HTTPS, DNS, TCP, ICMP and gRPC."
 version: "0.28.0"
-base: ubuntu@24.04
+base: ubuntu@26.04
 license: Apache-2.0
 services:
   blackbox:
@@ -26,9 +26,9 @@ parts:
       - libsystemd-dev
     override-build: |
       make build
-      install -D -m755 blackbox_exporter $CRAFT_PART_INSTALL/bin/blackbox_exporter
+      install -D -m755 blackbox_exporter $CRAFT_PART_INSTALL/usr/bin/blackbox_exporter
     stage:
-      - bin/blackbox_exporter
+      - usr/bin/blackbox_exporter
   default-config:
     plugin: dump
     source: .
