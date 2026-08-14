@@ -2,7 +2,7 @@ set allow-duplicate-recipes
 set allow-duplicate-variables
 import? 'rocks.just'
 
-lts_releases := '{"0.28": "2031-05-01"}'
+source_repo := 'prometheus/blackbox_exporter'
 
 [private]
 @default:
